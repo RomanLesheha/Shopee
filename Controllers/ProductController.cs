@@ -41,5 +41,6 @@ namespace Shopee.Controllers
             }
             return View("AddNewProduct");
         }
+
     }
 }
