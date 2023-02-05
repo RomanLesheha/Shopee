@@ -1,0 +1,30 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace Shopee.Models
+{
+    public class Product
+    {
+        [Required]
+        public string Name { get; set; }
+
+        public int Id { get; set; }
+        [Required]
+        public uint Price { get; set; }
+
+        public bool Availability { get; set; }
+
+        public uint? Discount { get; set; }
+
+        public uint? DiscountedPrice { get; set; }
+
+        public string Image { get; set; }
+
+        public string Description { get; set; }
+
+        public DateTime CreationTime { get; set; }
+    }
+}

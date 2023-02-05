@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.33027.164
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shopee", "Shopee.csproj", "{A9E5DDAF-F801-465E-AD64-0CF059F1D563}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A9E5DDAF-F801-465E-AD64-0CF059F1D563}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9E5DDAF-F801-465E-AD64-0CF059F1D563}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9E5DDAF-F801-465E-AD64-0CF059F1D563}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9E5DDAF-F801-465E-AD64-0CF059F1D563}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {985D9F94-2CC3-4565-822B-68F8598B803D}
+	EndGlobalSection
+EndGlobal

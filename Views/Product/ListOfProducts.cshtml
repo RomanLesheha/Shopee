@@ -1,0 +1,20 @@
+﻿@model IEnumerable<Product>;
+
+<div class="container">
+    @foreach (var item in Model)
+    {
+        <img src="@item.Image" alt="Alternate Text" width="10%" height="10%" />
+        <h1>@item.Name</h1>
+        if (item.Discount != null)
+        {
+            <h2><s>@item.Price</s></h2>
+        }else
+        {
+            <h2>@item.Price</h2>
+        }
+        <h3>@item.Discount</h3>
+        <h3>@item.DiscountedPrice</h3>
+        <h3>@item.Availability</h3>
+        <h3>@item.Description</h3>
+    }
+</div>
