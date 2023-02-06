@@ -1,6 +1,9 @@
 ﻿@model Product;
 
-<form class="container" method="post" asp-controller="Product" asp-action="AddNewProduct">
+    <h1>@ViewBag.link</h1>
+    <h1>@ViewBag.progress</h1>
+    <h1>@ViewBag.error</h1>
+<form class="container" method="post" asp-controller="Product" asp-action="AddNewProduct" enctype="multipart/form-data">
 
     <div class="form-group">
         <label asp-for="Name"></label>
@@ -33,8 +36,8 @@
     </div>
 
     <div class="form-group">
-        <label asp-for="Image"></label>
-        <input class="form-control" type="text" name="Image" value="" asp-for="Image" />
+        <label></label>
+        <input class="form-control" type="file"  name="formFile" value=""  required accept="image/*" />
         <span asp-validation-for="Image" class="text-danger"></span>
     </div>
 

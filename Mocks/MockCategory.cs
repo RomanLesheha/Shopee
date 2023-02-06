@@ -21,8 +21,31 @@ namespace Shopee.Mocks
         };
         IFirebaseClient client = new FireSharp.FirebaseClient(config);
 
-        public IEnumerable<Category> GetAllCategory => throw new NotImplementedException();
-
+        public IEnumerable<Category> GetAllCategory
+        {
+            get
+            {
+                List<Category> listOfAllCategories = new List<Category>();
+                try
+                {
+                    FirebaseResponse response = client.Get($"Categories/");
+                    dynamic data = JsonConvert.DeserializeObject<dynamic>(response.Body);
+                    if (data != null)
+                    {
+                        foreach (var item in data)
+                        {
+                            listOfAllCategories.Add(JsonConvert.DeserializeObject<Category>(((JProperty)item).Value.ToString()));
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.Message);
+                }
+                
+                return listOfAllCategories;
+            }
+        }
 
         public void AddNewCategory(Category category)
         {
@@ -31,11 +54,11 @@ namespace Shopee.Mocks
         }
 
        
-
         public IEnumerable<Product> GetAllProductsInCategory(string CategoryName)
         {
             List<Product> productsInCategory = new List<Product>();
-         
+            try
+            {
                 FirebaseResponse response = client.Get($"Categories/{CategoryName}/AllProducts/");
                 dynamic data = JsonConvert.DeserializeObject<dynamic>(response.Body);
                 if (data != null)
@@ -45,7 +68,11 @@ namespace Shopee.Mocks
                         productsInCategory.Add(JsonConvert.DeserializeObject<Product>(((JObject)item).ToString()));
                     }
                 }
-
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
             
             return productsInCategory;
         }

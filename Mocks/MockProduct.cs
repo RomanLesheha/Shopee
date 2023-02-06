@@ -8,7 +8,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace Shopee.Mocks
 {
@@ -20,6 +19,8 @@ namespace Shopee.Mocks
             BasePath = "https://shopee-a1-default-rtdb.europe-west1.firebasedatabase.app/"
         };
         IFirebaseClient client = new FireSharp.FirebaseClient(config);
+
+        
         public IEnumerable<Product> ListOfProducts
         {
             get
@@ -90,6 +91,7 @@ namespace Shopee.Mocks
         {
             
             List<Product> products = new List<Product>();
+
             FirebaseResponse response = client.Get("Products/");
             dynamic data = JsonConvert.DeserializeObject<dynamic>(response.Body);
 

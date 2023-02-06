@@ -14,17 +14,22 @@ namespace Shopee.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IProducts _product;
+        private readonly ICategory _category;
 
-        public HomeController(ILogger<HomeController> logger, IProducts products)
+        public HomeController(ILogger<HomeController> logger, IProducts products, ICategory categories)
         {
             _logger = logger;
             _product = products;
+            _category = categories;
         }
 
         public IActionResult Index()
         {
             var listofnew = _product.ListOfNewProducts;
-            return View(listofnew);
+            (IEnumerable<Product>, IEnumerable<Category>) obj;
+            obj.Item1 = _product.ListOfNewProducts;
+            obj.Item2 = _category.GetAllCategory;
+            return View(obj);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

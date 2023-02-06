@@ -8,7 +8,6 @@ namespace Shopee.Models
     public class Category
     {
         public string Name { get; set; }
-        public string CategoryImage { get; set; }
 
         public List<Product> AllProducts { get; set; } 
 

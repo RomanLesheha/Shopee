@@ -1,13 +1,13 @@
-﻿@model IEnumerable<Product>; 
+﻿@model (IEnumerable<Product>, IEnumerable<Category>);
 @{
     ViewData["Title"] = "Home Page";
 }
 
 <h1>Найсвіжіші товари</h1>
 <div class="text-center">
-    @foreach (var item in Model)
+    @foreach (var item in Model.Item1)
     {
-        
+
         <a asp-action="SelectedProduct" asp-controller="Product" asp-route-ProductID="@item.Id"><img src="@item.Image" alt="Alternate Text" width="10%" height="10%" /></a>
         <h1>@item.Name</h1>
         if (item.Discount != null)
@@ -18,6 +18,14 @@
         {
             <h2>@item.Price</h2>
         }
-        
+
+    }
+</div>
+
+<h1>Усі категорії</h1>
+<div class="text-center">
+    @foreach (var item in Model.Item2)
+    {
+        <h1>@item.Name</h1>
     }
 </div>
