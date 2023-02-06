@@ -1,6 +1,4 @@
-﻿using FireSharp.Interfaces;
-using FireSharp.Response;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Shopee.Interfeces;
 using Shopee.Models;
 using System;
@@ -13,16 +11,22 @@ namespace Shopee.Controllers
     public class ProductController : Controller
     {
         public readonly IProducts _products;
+        public readonly ICategory _categories;
 
-        public ProductController(IProducts IProducts)
+        public ProductController(IProducts IProducts , ICategory ICategory)
         {
             _products = IProducts;
+            _categories = ICategory;
         }
         public IActionResult Index()
         {
             return View();
         }
 
+        /// <summary>
+        /// Method to display list of all products on page 
+        /// </summary>
+        /// <returns></returns>
         public IActionResult ListOfProducts()
         {
             var list = _products.ListOfProducts;
@@ -37,7 +41,16 @@ namespace Shopee.Controllers
         {
             if (ModelState.IsValid)
             {
+                Category category = new Category();
+                category.AllProducts = (List<Product>)_categories.GetAllProductsInCategory(product.Category.Name);
+                category.AllProducts.Add(product);
+                category.Name = product.Category.Name;
+                category.CategoryImage = " ";
+                
+                
+
                 _products.AddNewProduct(product);
+                _categories.AddNewCategory(category);
             }
             return View("AddNewProduct");
         }

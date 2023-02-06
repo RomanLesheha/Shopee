@@ -6,6 +6,7 @@ using Shopee.Interfeces;
 using Shopee.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -24,16 +25,23 @@ namespace Shopee.Mocks
             get
             {
                 List<Product> products = new List<Product>();
-              
-                FirebaseResponse response = client.Get("Products/");
-                dynamic data = JsonConvert.DeserializeObject<dynamic>(response.Body);
-                if (data != null)
+                try
                 {
-                    foreach (var item in data)
+                    FirebaseResponse response = client.Get("Products/");
+                    dynamic data = JsonConvert.DeserializeObject<dynamic>(response.Body);
+                    if (data != null)
                     {
-                        products.Add(JsonConvert.DeserializeObject<Product>(((JProperty)item).Value.ToString()));
+                        foreach (var item in data)
+                        {
+                            products.Add(JsonConvert.DeserializeObject<Product>(((JProperty)item).Value.ToString()));
+                        }
                     }
                 }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.Message);
+                }
+               
                 return products;
             }
         }
@@ -43,37 +51,26 @@ namespace Shopee.Mocks
             get
             {
                 List<Product> products = new List<Product>();
-                FirebaseResponse response = client.Get("Products/");
-                dynamic data = JsonConvert.DeserializeObject<dynamic>(response.Body);
-
-                if (data !=null)
+                try
                 {
-                    foreach (var item in data)
+                    FirebaseResponse response = client.Get("Products/");
+                    dynamic data = JsonConvert.DeserializeObject<dynamic>(response.Body);
+
+                    if (data != null)
                     {
-                        products.Add(JsonConvert.DeserializeObject<Product>(((JProperty)item).Value.ToString()));
+                        foreach (var item in data)
+                        {
+                            products.Add(JsonConvert.DeserializeObject<Product>(((JProperty)item).Value.ToString()));
+                        }
                     }
                 }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.Message);
+                }
+                
                 return products.Where(p=>p.CreationTime>=DateTime.Now.AddDays(-7));
             }
-        }
-        public bool CheckIdAlreadyCreated(int value)
-        {
-            List<Product> products = new List<Product>();
-            FirebaseResponse response = client.Get("Products/");
-            dynamic data = JsonConvert.DeserializeObject<dynamic>(response.Body);
-            if (data != null)
-            {
-                foreach (var item in data)
-                {
-                    //products.Add(JsonConvert.DeserializeObject<Product>(((JProperty)item).Value.ToString()));
-
-                    if (data["Id"]==value)
-                        return true;
-                    else
-                        return false;
-                }
-            }
-            return false;
         }
 
         public void AddNewProduct(Product product)
@@ -82,11 +79,10 @@ namespace Shopee.Mocks
 
             product.Availability = true;
             product.CreationTime = DateTime.Today;
-            var value = random.Next(100000, 999999);
-            product.Id = value;
-            
+            product.Id = random.Next(1000000, 9999999);
+
             var data = product;
-            FirebaseResponse response = client.Set("Products/" + data.Id, data);
+            SetResponse response = client.Set("Products/" + data.Id, data);
 
         }
 

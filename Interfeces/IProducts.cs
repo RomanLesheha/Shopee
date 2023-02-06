@@ -10,9 +10,9 @@ namespace Shopee.Interfeces
     {
         public IEnumerable<Product> ListOfProducts { get; }
 
-        public void AddNewProduct(Product product);
-
         public IEnumerable<Product> ListOfNewProducts { get; }
+
+        public void AddNewProduct(Product product);
 
         public Product GetSelectedProduct(int id);
     }

@@ -26,6 +26,7 @@ namespace Shopee
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddTransient<IProducts, MockProduct>();
+            services.AddTransient<ICategory, MockCategory>();
             services.AddControllersWithViews();
         }
 

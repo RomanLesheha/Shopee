@@ -10,7 +10,7 @@ namespace Shopee.Models
     {
         [Required]
         public string Name { get; set; }
-
+        [Key]
         public int Id { get; set; }
         [Required]
         public uint Price { get; set; }
@@ -26,5 +26,7 @@ namespace Shopee.Models
         public string Description { get; set; }
 
         public DateTime CreationTime { get; set; }
+
+        public virtual Category Category { get; set; }
     }
 }

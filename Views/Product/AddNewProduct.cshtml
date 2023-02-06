@@ -38,6 +38,12 @@
         <span asp-validation-for="Image" class="text-danger"></span>
     </div>
 
+    <select class="form-control" asp-for="Category.Name">
+        <option>Select Category</option>
+        <option>Winter shoes</option>
+        <option>Summer shoes</option>
+    </select>
+
     <button type="submit" class="btn btn-primary bg-info">Підтвердити</button>
     <button asp-controller="Home" asp-action="Index" class="btn btn-secondary">Назад</button>
 </form> 
