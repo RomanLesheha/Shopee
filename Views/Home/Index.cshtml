@@ -1,8 +1,23 @@
-﻿
+﻿@model IEnumerable<Product>; 
 @{
     ViewData["Title"] = "Home Page";
 }
 
+<h1>Найсвіжіші товари</h1>
 <div class="text-center">
-
+    @foreach (var item in Model)
+    {
+        
+        <a asp-action="SelectedProduct" asp-controller="Product" asp-route-ProductID="@item.Id"><img src="@item.Image" alt="Alternate Text" width="10%" height="10%" /></a>
+        <h1>@item.Name</h1>
+        if (item.Discount != null)
+        {
+            <h2><s>@item.Price</s></h2>
+        }
+        else
+        {
+            <h2>@item.Price</h2>
+        }
+        
+    }
 </div>

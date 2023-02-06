@@ -41,6 +41,10 @@ namespace Shopee.Controllers
             }
             return View("AddNewProduct");
         }
-
+        public IActionResult SelectedProduct(int ProductID)
+        {
+            var obj = _products.GetSelectedProduct(ProductID);
+            return View(obj);
+        }
     }
 }

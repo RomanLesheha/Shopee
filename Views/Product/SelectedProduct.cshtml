@@ -1,0 +1,18 @@
+﻿@model Product;
+<div class="container">
+    <img src="@Model.Image" alt="Alternate Text" width="10%" height="10%" />
+    <h1>@Model.Name</h1>
+    @if (Model.Discount != null)
+    {
+        <h2><s>@Model.Price</s></h2>
+    }
+    else
+    {
+            <h2>@Model.Price</h2>
+    }
+    <h3>@Model.Discount</h3>
+    <h3>@Model.DiscountedPrice</h3>
+    <h3>@Model.Availability</h3>
+    <h3>@Model.Description</h3>
+    
+</div>
