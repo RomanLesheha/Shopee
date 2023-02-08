@@ -23,8 +23,6 @@ namespace Shopee.Controllers
         private readonly string AuthEmail = "shopee@gmail.com";
         private readonly string AuthPassword = "roman123";
 
-        public static string Link;
-
         public readonly IProducts _products;
         public readonly ICategory _categories;
 
@@ -51,13 +49,18 @@ namespace Shopee.Controllers
         {
             return View();
         }
-       
+        /// <summary>
+        /// Method to add new Product to FireBase Realtime DataBase and upload Product Image to Firebase Storage
+        /// </summary>
+        /// <param name="product"></param>
+        /// <param name="file"></param>
+        /// <returns></returns>
         [HttpPost]
-        public async Task<IActionResult> AddNewProduct(Product product , IFormFile formFile)
+        public async Task<IActionResult> AddNewProduct(Product product , IFormFile file)
         {
             if (ModelState.IsValid)
             {
-                var stream = formFile.OpenReadStream(); //cast IFormFile to Stream by copying data
+                var stream = file.OpenReadStream(); //cast IFormFile to Stream by copying data
 
                 var auth = new FirebaseAuthProvider(new FirebaseConfig(ApiKey));
                 var a = await auth.SignInWithEmailAndPasswordAsync(AuthEmail, AuthPassword);
@@ -74,7 +77,7 @@ namespace Shopee.Controllers
                     })
                     .Child("Image")
                     .Child("ProductsImage")
-                    .Child(formFile.FileName)
+                    .Child(file.FileName)
                     .PutAsync(stream, cancellation.Token);
 
                 try
@@ -83,6 +86,7 @@ namespace Shopee.Controllers
                     category.AllProducts = (List<Product>)_categories.GetAllProductsInCategory(product.Category.Name);//call method with return list of Products which have already been in DB
                     category.AllProducts.Add(product); // Adding new item to category list of products
                     category.Name = product.Category.Name;
+                    product.DiscountedPrice = (uint?)(product.Price - (product.Price * (product.Discount / 100)));
                     product.Image = await task; 
 
                     _products.AddNewProduct(product); //adding new product to DB
@@ -97,6 +101,11 @@ namespace Shopee.Controllers
             }
             return BadRequest();
         }
+        /// <summary>
+        /// Method to return page with all information about selected product
+        /// </summary>
+        /// <param name="ProductID"></param>
+        /// <returns></returns>
         public IActionResult SelectedProduct(int ProductID)
         {
             var obj = _products.GetSelectedProduct(ProductID);

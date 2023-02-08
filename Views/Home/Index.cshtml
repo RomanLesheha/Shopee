@@ -2,30 +2,66 @@
 @{
     ViewData["Title"] = "Home Page";
 }
+<head>
+    <link rel="stylesheet" href="~/css/Style.css" />
+</head>
+<body>
+    <div class="mainPicture container-fluid">
+        <div class="textmainpicture">
+            <h1 class="nameStoretext"> Shopee shoes store</h1>
+            <h2 class="infoText">Additional discount for Armed Forces of Ukraine and forced migrants.</h2>
+        </div>
 
-<h1>Найсвіжіші товари</h1>
-<div class="text-center">
-    @foreach (var item in Model.Item1)
-    {
+    </div>
+</body>
 
-        <a asp-action="SelectedProduct" asp-controller="Product" asp-route-ProductID="@item.Id"><img src="@item.Image" alt="Alternate Text" width="10%" height="10%" /></a>
-        <h1>@item.Name</h1>
-        if (item.Discount != null)
+<div class="container">
+    <div class="newitemtext text-center">
+        <h1>NEW THIS WEEK</h1>
+        <hr />
+    </div>
+    <div class="AllProducts">
+        @foreach (var item in Model.Item1)
         {
-            <h2><s>@item.Price</s></h2>
-        }
-        else
-        {
-            <h2>@item.Price</h2>
-        }
+        <div style="border: 2px solid red; width: 400px; height: 60vh;">
+            @if (item.Discount != null)
+            {
+                <div style="width:fit-content; height:fit-content; margin-left:80%;">
+                    <h5 style="background-color:darkred;color:white;">SALE</h5>
+                    <h6 style="background-color:red; color:white; width:80px;">- @item.Discount %</h6>
+                </div>
+            }
 
-    }
+            <a asp-action="SelectedProduct" asp-controller="Product" asp-route-ProductID="@item.Id"> <img src="@item.Image" alt="Alternate Text" /> </a>
+            <h2>@item.Name</h2>
+
+            @if (item.Discount != null)
+            {
+                <div style="display:flex; justify-content:space-evenly">
+                    <h4 class="test"><s>@item.Price uah</s></h4>
+                    <h4><b style="color:red;">@item.DiscountedPrice uah</b></h4>
+                </div>
+                <h5>SAVING -@item.SavingMoney()</h5>
+            }
+            else
+            {
+                <h3>@item.Price</h3>
+            }
+
+        </div>
+        }
+    </div>
+
+    <h1>Усі категорії</h1>
+    <div class="text-center">
+        @foreach (var item in Model.Item2)
+        {
+            <h1>@item.Name</h1>
+        }
+    </div>
 </div>
 
-<h1>Усі категорії</h1>
-<div class="text-center">
-    @foreach (var item in Model.Item2)
-    {
-        <h1>@item.Name</h1>
-    }
-</div>
+
+
+
+

@@ -18,7 +18,7 @@ namespace Shopee.Models
 
         public bool Availability { get; set; }
 
-        public uint? Discount { get; set; }
+        public double? Discount { get; set; }
 
         public uint? DiscountedPrice { get; set; }
 
@@ -29,5 +29,10 @@ namespace Shopee.Models
         public DateTime CreationTime { get; set; }
 
         public virtual Category Category { get; set; }
+
+        public uint? SavingMoney()
+        {
+            return Price - DiscountedPrice;
+        }
     }
 }

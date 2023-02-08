@@ -1,0 +1,73 @@
+﻿body {
+    
+}
+.mainPicture {
+    background-image: url(https://firebasestorage.googleapis.com/v0/b/shopee-a1.appspot.com/o/PictureForWeb%2FHeaderPhotoMainPage.png?alt=media&token=f25c55ea-a21b-4826-a00f-d2bab7e0433c);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+}
+.textmainpicture {
+    padding-left: 10%;
+    padding-top: 30vh;
+    width: 50%;
+    font-family: 'Gilda Display';
+    font-style: normal;
+}
+.nameStoretext {
+    color: white;
+    font-weight: 400;
+    font-size: 54px;
+    line-height: 142.02%;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    letter-spacing: 0.06em;
+    margin-bottom: 2px;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+.infoText {
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 142.02%;
+
+    letter-spacing: 0.06em;
+    color: rgba(255, 255, 255, 0.85);
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.newitemtext {
+    margin-top: 5%;
+    top: 50%;
+    left: 50%;
+    font-family: 'Gilda Display';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 53px;
+    line-height: 62px;
+}
+.newitemtext hr {
+    border: 2px solid #000000;
+    width:50%;
+}
+
+.AllProducts {
+    min-height: 100vh;
+    align-items: center;
+    justify-content: center;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    gap: 50px;
+    text-align:center;
+}
+.Items{
+    display: block;
+    border: 2px solid red;
+    width: 400px;
+    height: 700px;
+}
+.DiscountSale {
+    width: fit-content;
+    height: fit-content;
+    margin-left: 80%;
+}
+

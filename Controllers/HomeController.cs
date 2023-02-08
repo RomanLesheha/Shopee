@@ -25,7 +25,6 @@ namespace Shopee.Controllers
 
         public IActionResult Index()
         {
-            var listofnew = _product.ListOfNewProducts;
             (IEnumerable<Product>, IEnumerable<Category>) obj;
             obj.Item1 = _product.ListOfNewProducts;
             obj.Item2 = _category.GetAllCategory;
