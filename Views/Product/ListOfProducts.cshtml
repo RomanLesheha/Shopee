@@ -1,20 +1,68 @@
 ﻿@model IEnumerable<Product>;
+    <head>
+        <link rel="stylesheet" href="~/css/Style.css" />
+    </head>
+    <body>
+        <div class="ParametersBlock bg-dark" >
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Dropdown button
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" asp-action="ListOfProducts" asp-controller="Product" asp-route-parameters="0">Default</a>
+                    <a class="dropdown-item" asp-action="ListOfProducts" asp-controller="Product" asp-route-parameters="1">From cheap to expensive</a>
+                    <a class="dropdown-item" asp-action="ListOfProducts" asp-controller="Product" asp-route-parameters="2">From expensive to cheap</a>
+                    <a class="dropdown-item" asp-action="ListOfProducts" asp-controller="Product" asp-route-parameters="2">By new</a>
+                </div>
+            </div>
 
-<div class="container">
-    @foreach (var item in Model)
-    {
-        <img src="@item.Image" alt="Alternate Text" width="10%" height="10%" />
-        <h1>@item.Name</h1>
-        if (item.Discount != null)
-        {
-            <h2><s>@item.Price</s></h2>
-        }else
-        {
-            <h2>@item.Price</h2>
+        </div>
+        <div class="container AllProducts">
+            @foreach (var item in Model)
+            {
+                <div style="width: 320px; height: 65vh; overflow:hidden;">
+                    @if (item.Discount != null)
+                    {
+                        <div style="width:310px; height: 40px; margin:5px; display:block;">
+                            <p style="background-color:darkred;color:white;"> SALE - @item.Discount %</p>
+                        </div>
+                    }
+                    else
+                    {
+                        <div style="height:50px; margin-bottom:20px;"></div>//empty div for відступ
+                    }
+
+                    <a asp-action="SelectedProduct" asp-controller="Product" asp-route-ProductID="@item.Id"> <img style=" width:60%;height:50%; background-size: contain;" src="@item.Image" alt="Alternate Text" /> </a>
+
+                    <div>
+                        <p style="max-width: 390px; text-overflow: ellipsis; padding: 10px 10px 0px 10px;overflow: hidden; font-size:18px;">@item.Name</p>
+                    </div>
+
+                    @if (item.Discount != null)
+                    {
+                        <div style="display:flex; justify-content:space-evenly">
+                            <h5 class="test"><s>@item.Price uah</s></h5>
+                            <h5><b style="color:red;">@item.DiscountedPrice uah</b></h5>
+                        </div>
+                        <div style="display: flex; justify-content: center;">
+                            <div style="border:2px dashed grey; width: fit-content; height: fit-content; padding:5px;">
+                                <b>SAVING -@item.SavingMoney() uah</b>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <h5><b>@item.Price uah</b></h5>
+                    }
+                </div>
+            }
+        </div>
+    </body>
+
+    <style>
+        .ParametersBlock {
+            margin-top: 80px;
+            height: 15vh;
+            width: 100%;
         }
-        <h3>@item.Discount</h3>
-        <h3>@item.DiscountedPrice</h3>
-        <h3>@item.Availability</h3>
-        <h3>@item.Description</h3>
-    }
-</div>
+    </style>

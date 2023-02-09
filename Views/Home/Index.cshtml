@@ -11,55 +11,64 @@
             <h1 class="nameStoretext"> Shopee shoes store</h1>
             <h2 class="infoText">Additional discount for Armed Forces of Ukraine and forced migrants.</h2>
         </div>
+    </div>
+    <div class="container text-center">
+        <div class="newitemtext text-center">
+            <h1>NEW THIS WEEK</h1>
+            <hr />
+        </div>
+        <div class="AllProducts">
+            @foreach (var item in Model.Item1)
+            {
+                <div style="width: 320px; height: 65vh; overflow:hidden;">
+                    @if (item.Discount != null)
+                    {
+                        <div style="width:310px; height: 40px; margin:5px; display:block;">
+                            <p style="background-color:darkred;color:white;"> SALE - @item.Discount %</p>
+                        </div>
+                    }
+                    else
+                    {
+                        <div style="height:50px; margin-bottom:20px;"></div>//empty div for відступ
+                    }
 
+                    <a asp-action="SelectedProduct" asp-controller="Product" asp-route-ProductID="@item.Id"> <img style=" width:60%;height:50%; background-size: contain;" src="@item.Image" alt="Alternate Text" /> </a>
+
+                    <div>
+                        <p style="max-width: 390px; text-overflow: ellipsis; padding: 10px 10px 0px 10px;overflow: hidden; font-size:18px;">@item.Name</p>
+                    </div>
+
+                    @if (item.Discount != null)
+                    {
+                        <div style="display:flex; justify-content:space-evenly">
+                            <h5 class="test"><s>@item.Price uah</s></h5>
+                            <h5><b style="color:red;">@item.DiscountedPrice uah</b></h5>
+                        </div>
+                        <div style="display: flex; justify-content: center;">
+                            <div style="border:2px dashed grey; width: fit-content; height: fit-content; padding:5px;">
+                                <b>SAVING -@item.SavingMoney() uah</b>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <h5><b>@item.Price uah</b></h5>
+                    }
+                </div>
+            }
+        </div>
+
+        <h1>Усі категорії</h1>
+        <div class="text-center">
+            @foreach (var item in Model.Item2)
+            {
+                <h1>@item.Name</h1>
+            }
+        </div>
     </div>
 </body>
 
-<div class="container">
-    <div class="newitemtext text-center">
-        <h1>NEW THIS WEEK</h1>
-        <hr />
-    </div>
-    <div class="AllProducts">
-        @foreach (var item in Model.Item1)
-        {
-        <div style="border: 2px solid red; width: 400px; height: 60vh;">
-            @if (item.Discount != null)
-            {
-                <div style="width:fit-content; height:fit-content; margin-left:80%;">
-                    <h5 style="background-color:darkred;color:white;">SALE</h5>
-                    <h6 style="background-color:red; color:white; width:80px;">- @item.Discount %</h6>
-                </div>
-            }
 
-            <a asp-action="SelectedProduct" asp-controller="Product" asp-route-ProductID="@item.Id"> <img src="@item.Image" alt="Alternate Text" /> </a>
-            <h2>@item.Name</h2>
-
-            @if (item.Discount != null)
-            {
-                <div style="display:flex; justify-content:space-evenly">
-                    <h4 class="test"><s>@item.Price uah</s></h4>
-                    <h4><b style="color:red;">@item.DiscountedPrice uah</b></h4>
-                </div>
-                <h5>SAVING -@item.SavingMoney()</h5>
-            }
-            else
-            {
-                <h3>@item.Price</h3>
-            }
-
-        </div>
-        }
-    </div>
-
-    <h1>Усі категорії</h1>
-    <div class="text-center">
-        @foreach (var item in Model.Item2)
-        {
-            <h1>@item.Name</h1>
-        }
-    </div>
-</div>
 
 
 

@@ -9,7 +9,7 @@ namespace Shopee.Interfeces
 {
     public interface IProducts
     {
-        public IEnumerable<Product> ListOfProducts { get; }
+        public IEnumerable<Product> ListOfProducts(int parameter);
 
         public IEnumerable<Product> ListOfNewProducts { get; }
 

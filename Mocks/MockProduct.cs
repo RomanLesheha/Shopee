@@ -21,10 +21,8 @@ namespace Shopee.Mocks
         IFirebaseClient client = new FireSharp.FirebaseClient(config);
 
         
-        public IEnumerable<Product> ListOfProducts
+        public IEnumerable<Product> ListOfProducts(int parameter)
         {
-            get
-            {
                 List<Product> products = new List<Product>();
                 try
                 {
@@ -42,9 +40,23 @@ namespace Shopee.Mocks
                 {
                     Debug.WriteLine(ex.Message);
                 }
-               
-                return products;
+            switch (parameter)
+            {
+                case 0: 
+                    return products;
+                case 1:
+                    List<Product> objListOrder = products.OrderBy(order => order.Price).ToList();
+                    return objListOrder;
+                case 2:
+                    List<Product> objListOrderRevers = products.OrderBy(order => order.Price).Reverse().ToList();
+                    return objListOrderRevers;
+                case 3:
+                    List<Product> objListOrderTime = products.OrderBy(order => order.CreationTime).Reverse().ToList();
+                    return objListOrderTime;
+                default:
+                    break;
             }
+            return products;
         }
 
         public IEnumerable<Product> ListOfNewProducts

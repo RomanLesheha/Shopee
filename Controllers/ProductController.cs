@@ -40,9 +40,9 @@ namespace Shopee.Controllers
         /// Method to display list of all products on page 
         /// </summary>
         /// <returns></returns>
-        public IActionResult ListOfProducts()
+        public IActionResult ListOfProducts(int parameters)
         {
-            var list = _products.ListOfProducts;
+            var list = _products.ListOfProducts(parameters);
             return View(list);
         }
         public IActionResult AddNewProduct()
